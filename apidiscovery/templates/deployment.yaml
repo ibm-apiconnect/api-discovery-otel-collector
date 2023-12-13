@@ -1,0 +1,90 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: management-api-discovery-otel-collector
+  namespace: {{ .Values.discovery.istio_namespace }}
+  labels:
+    app.kubernetes.io/instance: management
+    app.kubernetes.io/managed-by: ibm-apiconnect
+    app.kubernetes.io/name: api-discovery-otel-collector
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: management
+      app.kubernetes.io/managed-by: ibm-apiconnect
+      app.kubernetes.io/name: api-discovery-otel-collector
+  template:
+    metadata:
+      name: management-api-discovery-otel-collector
+      labels:
+        app.kubernetes.io/instance: management
+        app.kubernetes.io/managed-by: ibm-apiconnect
+        app.kubernetes.io/name: api-discovery-otel-collector
+    spec:
+      restartPolicy: Always
+      # imagePullSecrets:
+      #   - name: atf-pull-secret
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/arch
+                    operator: In
+                    values:
+                      - amd64
+                      - s390x
+      terminationGracePeriodSeconds: 30
+      securityContext:
+        runAsNonRoot: true
+        supplementalGroups:
+          - 1000
+      containers:
+        - resources:
+            limits:
+              cpu: 500m
+              memory: 256Mi
+            requests:
+              cpu: 20m
+              memory: 128Mi
+          name: api-discovery-otel-collector
+          env:
+            - name: DISABLE_MTLS
+              value: "true"
+            - name: VELOX_ACCESS_SCOPE
+              value: "org"
+            - name: PROVIDER_ORG
+              value: "{{ .Values.discovery.provider_org }}"
+            - name: DISCOVERY_SERVER_BASE_URI
+              value: "https://{{ .Values.discovery.platform_api_prefix }}.{{ .Values.discovery.apic_host_domain }}"
+            - name: APIM_BASE_URI
+              value: "https://{{ .Values.discovery.platform_api_prefix }}.{{ .Values.discovery.apic_host_domain }}"
+            - name: LOG_LEVEL
+              value: "{{ .Values.logging.log_level }}"
+            - name: LOG_ENCODER
+              value: "{{ .Values.logging.log_encoder }}"
+          volumeMounts:
+            - mountPath: /etc/velox/credentials/org
+              name: api-discovery-secret
+              readOnly: true
+          securityContext:
+            capabilities:
+              drop:
+                - ALL
+            privileged: false
+            runAsNonRoot: true
+            readOnlyRootFilesystem: false
+            allowPrivilegeEscalation: false
+          imagePullPolicy: Always
+          image: {{ .Values.images.api_discovery_collector }}
+      dnsPolicy: ClusterFirst
+      volumes:
+      - name: api-discovery-secret
+        secret:
+          defaultMode: 420
+          secretName: api-discovery-secret
+  strategy:
+    type: Recreate
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600

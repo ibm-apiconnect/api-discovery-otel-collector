@@ -11,7 +11,7 @@ https://istio.io/latest/docs/setup/getting-started/
 
 The collector has been tested with `istioctl` version `1.19.x` & `1.20.x`  
 
-## Pre-req: ensure helm is installed  
+## Pre-req: Ensure helm is installed  
 
 See here for details  
 https://helm.sh/docs/intro/install/  
@@ -21,7 +21,7 @@ https://helm.sh/docs/intro/install/
 ### Update the Istio mesh config  
 Firstly a reference to the discovery collector (which will be deployed in the suqsequent steps) will need to be registered in the istio MeshConfig to send trace data to the discovery service.  
 See the Provider Selection section for some details: https://istio.io/latest/docs/tasks/observability/telemetry/#provider-selection    
-There is an example of the patch that will need to be configured on the mesh in the [helm/patches](deployment/helm/patches) directory.   
+There is an example of the patch that will need to be configured on the mesh in the [apidiscovery/patches](apidiscovery/patches) directory.   
 This is a complete example of what the `istio` configmap could look like but the salient lines from the example which need to be added to your own configuration under extensionProviders are the following   
 ```
     extensionProviders:
@@ -42,7 +42,7 @@ See here for more details: https://istio.io/v1.10/docs/reference/config/istio.me
 
 ### Use the Helm chart to deploy the collector.  
 
-In the helm directory, update the [values.yaml](deployment/helm/values.yaml) file based on your apiconnect provider org, authentication and istio set up  
+In the helm directory, update the [values.yaml](apidiscovery/values.yaml) file based on your apiconnect provider org, authentication and istio set up  
 
 The following parameters require updates:  
 

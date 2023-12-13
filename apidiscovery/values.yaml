@@ -1,0 +1,16 @@
+---
+discovery:
+  # platform_api_prefix is not required to change for ApiConnect on Cloud
+  platform_api_prefix: platform-api
+  apic_host_domain: us-east-a.apiconnect.automation.ibm.com
+  provider_org: myOrgName
+  api_key: xxxxxx
+  istio_namespace: istio-system
+  telemetry_namespace: default
+logging:
+  log_level: info
+  # supported values are json and console
+  log_encoder: json
+
+images:
+  api_discovery_collector: ghcr.io/ibm-apiconnect/api-discovery-otel-collector:20231208-145107

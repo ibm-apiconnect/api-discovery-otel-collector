@@ -1,0 +1,14 @@
+---
+apiVersion: telemetry.istio.io/v1alpha1
+kind: Telemetry
+metadata:
+  name: api-discovery-otel
+  namespace: {{ .Values.discovery.istio_namespace }}
+spec:
+#  accessLogging:
+#    - providers:
+#      - name: discoveryOtelCollector
+  tracing:
+  - providers:
+    - name: discoveryOtelCollector
+    randomSamplingPercentage: 100
