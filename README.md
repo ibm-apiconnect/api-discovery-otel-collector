@@ -54,7 +54,7 @@ The following parameters require updates:
 The apikey will be added to a kubernetes secret as part of the deployment and then mounted on the collector deployment pod.  
 - `istio_namespace`: The namespace where istio has been deployed on your cluster. As required by istio's telemetry integration the collector pod will be deployed here.      
 - `telemetry_namespace`: This is where the istio Telemetry CR will be deployed. By default the values file sets this to `istio-system` as the root configuration namespace to provide mesh level collection configuration. This can be customized as you wish based on your collection requirements regarding the deployed applications you want to be discovered. See here for further details https://istio.io/latest/docs/reference/config/telemetry/.  
-- `images.api_discovery_collector`: As new versions of the collectors are released updating this property will enable the upgrade of the collector deployment. Note: collectors will require updates to ensure they remain compatible with the discovery service. Details of these updates will be available in this repository.....(TODO add some more details)  
+- `images.api_discovery_collector`: As new versions of the collectors are released updating this property will enable the upgrade of the collector deployment. Note: collectors will require updates to ensure they remain compatible with the discovery service. Details of these updates will be available in this repository.
 - `logging.log_level`: Default log_level is `info`. For debug purposes the log level can be increased to debug if needed.  
 
 Once you have made the required updates to the values.yaml file you can deploy the collector.  
