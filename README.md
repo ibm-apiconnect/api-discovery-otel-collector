@@ -47,7 +47,7 @@ In the helm directory, update the [values.yaml](apidiscovery/values.yaml) file b
 The following parameters require updates:  
 
  - `discovery.datasource_name` - Optional field to set the datasource name for all APIs discovered by the collector. If datasource name is empty, the namespace of the collected API will be used.  
- - `discovery.apic_host_domain` - Domain name of the ApiConnect instance where discovered APIs will be sent.<br /> &nbsp; Example : `d-j02.apiconnect.dev.automation.ibm.com`  
+ - `discovery.apic_host_domain` - Domain name of the ApiConnect instance where discovered APIs will be sent.<br /> &nbsp; Example : `us-east-a.apiconnect.automation.ibm.com`  
  - `discovery.provider_org` - The provider org name of the apiconnect manager  
  - `discovery.apikey` - An API Key can be obtained from the api-manager for the user who has permission to create an API.  
 &nbsp; Get the API key from the APIC Manager using a link of the following structure - `http://{api-host}/manager/auth/manager/sign-in/?from=TOOLKIT` (typically used with an OIDC user registry like IBM Verify). 
