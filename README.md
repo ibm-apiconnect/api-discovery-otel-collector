@@ -11,7 +11,7 @@ https://istio.io/latest/docs/setup/getting-started/
 
 The collector has been tested with `istioctl` version `1.19.x` & `1.20.x`  
 
-## Pre-req: Ensure helm is installed  
+## Pre-req: Ensure helm is installed.
 
 See here for details  
 https://helm.sh/docs/intro/install/  
