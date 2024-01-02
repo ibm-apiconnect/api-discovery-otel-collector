@@ -16,14 +16,14 @@ data:
         opentelemetry:
           service: "management-api-discovery-otel-collector.istio-system.svc.cluster.local"
           port: 5555
-	  - envoyOtelAls:
-	  	  port: 4317
-		  service: opentelemetry-collector.istio-system.svc.cluster.local
-		name: otel
-	  - name: skywalking
-	    skywalking:
-		  port: 11800
-		  service: tracing.istio-system.svc.cluster.local
+      - envoyOtelAls:
+          port: 4317
+          service: opentelemetry-collector.istio-system.svc.cluster.local
+        name: otel
+      - name: skywalking
+        skywalking:
+          port: 11800
+          service: tracing.istio-system.svc.cluster.local
     enablePrometheusMerge: true
     extensionProviders:
     - name: otel
