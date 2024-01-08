@@ -1,6 +1,7 @@
 ---
 discovery:
   # platform_api_prefix is not required to change for ApiConnect on Cloud
+  datasource_name: myistio-data-source
   platform_api_prefix: platform-api
   apic_host_domain: us-east-a.apiconnect.automation.ibm.com
   provider_org: myOrgName
