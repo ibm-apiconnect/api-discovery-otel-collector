@@ -50,8 +50,6 @@ spec:
               memory: 128Mi
           name: api-discovery-otel-collector
           env:
-            - name: DISABLE_MTLS
-              value: "true"
             - name: VELOX_ACCESS_SCOPE
               value: "org"
             - name: PROVIDER_ORG
