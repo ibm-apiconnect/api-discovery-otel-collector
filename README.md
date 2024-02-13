@@ -20,8 +20,8 @@ The following parameters require updates:
  - `discovery.datasource_type` - (Optional) field to set the datasource type to decide if the specific telemetry configuration is needed. If the datasource type is istio, the required Istio Telemetry CR will be installed or helm will ignore the telemetry creation.
  - `discovery.apic_host_domain` - Domain name of the ApiConnect instance where discovered APIs will be sent.<br /> &nbsp; Example : `us-east-a.apiconnect.automation.ibm.com`  
  - `discovery.provider_org` - The provider org name of the apiconnect manager  
- - `discovery.apikey` - An API Key can be obtained from the api-manager for the user who has permission to create an API.  
-&nbsp; Get the API key from the APIC Manager using a link of the following structure - `http://{api-host}/manager/auth/manager/sign-in/?from=TOOLKIT` (typically used with an OIDC user registry like IBM Verify). 
+ - `discovery.apikey` - An API Key can be obtained from the api-manager for the user who has access to post the API.
+An API key can be created by logging into the APIC Manager UI and selecting the "My API Keys" option under the profile icon from the top navigation bar. 
 The apikey will be added to a kubernetes secret as part of the deployment and then mounted on the collector deployment pod.  
 - `namespace`: The namespace where istio or nginx has been deployed on your cluster. As required by istio's telemetry integration the collector pod will be deployed here.
 - `images.api_discovery_collector`: As new versions of the collectors are released updating this property will enable the upgrade of the collector deployment. Note: collectors will require updates to ensure they remain compatible with the discovery service. Details of these updates will be available in this repository.
