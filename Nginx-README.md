@@ -8,7 +8,7 @@ Some of those different integrations are outlined below
 ### 1. otel-webserver-module
 The Otel-webserver module can be found at the following location - https://github.com/open-telemetry/opentelemetry-cpp-contrib/tree/main/instrumentation/otel-webserver-module
 
-The webserver module can be found as downloadable in [releases](https://github.com/open-telemetry/opentelemetry-cpp-contrib/releases)
+The webserver module can be found and downloaded from [releases](https://github.com/open-telemetry/opentelemetry-cpp-contrib/releases)
 
 To configure the webserver module and to send traces to the Opentelemetry collector, you can update the nginx deployment to use the OTEL_EXPORTER_OTLP_ENDPOINT to point to the Apiconnect discovery collector
 ```
@@ -17,7 +17,7 @@ To configure the webserver module and to send traces to the Opentelemetry collec
           value: management-api-discovery-otel-collector.{namespace}.svc:5555
 ```
 
-Or you can alternatively use NginxModuleOtelExporterEndpoint in opentelemetry config on your nginx server. See here for a full list of [Webserver module](https://github.com/open-telemetry/opentelemetry-cpp-contrib/tree/main/instrumentation/otel-webserver-module#configuration-1) configurations which can be set in the opentelemetry config and used to explitly give some other trace parameter values.
+Or you can alternatively use NginxModuleOtelExporterEndpoint in the opentelemetry config on your nginx server. See here for a full list of [Webserver module](https://github.com/open-telemetry/opentelemetry-cpp-contrib/tree/main/instrumentation/otel-webserver-module#configuration-1) configurations which can be set in the opentelemetry config and used to explitly give some other trace parameter values.
 
 The datasource name of the APIs collected through this integration will be named after the attribute NginxModuleServiceName from the opentelemetry conf.
 
@@ -80,15 +80,13 @@ Similar to the previous module, to configure this module and to send traces to t
         - name: OTEL_EXPORTER_OTLP_ENDPOINT
           value: management-api-discovery-otel-collector.{namespace}.svc:5555
 ```
-Or you can alternatively configure it in the otel-nginx.toml as in the opentelemetry-cpp-contrib.
+Or you can alternatively configure it in the otel-nginx.toml as shown in the opentelemetry-cpp-contrib documentation.
 
-This module helps configuring the nginx.conf to use different variables to customize the traces that can be sent to Discovery service. 
+This module allows the different variables to be used in the nginx.conf in order to customize the traces that can be sent to Discovery service. 
 See here for a full list of [nginx-directives](https://github.com/open-telemetry/opentelemetry-cpp-contrib/tree/main/instrumentation/nginx#nginx-directives) configurations which can be set in the nginx config and used to explitly give some trace parameter values.
-opentelemetry_attribute
 
 The datasource name of the APIs collected through this integration will be named after the env OTEL_SERVICE_NAME from the nginx deployment or the service name from the otel-nginx.toml.
-
-Or this module will support a custom trace attribute [opentelemetry_attribute](https://github.com/open-telemetry/opentelemetry-cpp-contrib/tree/main/instrumentation/nginx#opentelemetry_attribute) which can be used to set datasource name via `ibm-api-discovery-datasource.name`
+Alternatively this module can support setting custom trace attributes [opentelemetry_attribute](https://github.com/open-telemetry/opentelemetry-cpp-contrib/tree/main/instrumentation/nginx#opentelemetry_attribute) which can be used to set the datasource name via `ibm-api-discovery-datasource.name`
 
 Below is an example of nginx config when using this module
 
@@ -130,7 +128,7 @@ You can configure this module to send traces to the Opentelemetry collector by s
 This module helps configuring the nginx.conf to use different variables to customize the traces that can be sent to Discovery service. 
 See here for a full list of [module-directives](https://docs.nginx.com/nginx/admin-guide/dynamic-modules/opentelemetry/#module-directives) configurations which can be set in the nginx config and used to explitly give some trace parameter values.
 
-The datasource name of the APIs collected through this integration will be named after the attribute [otel_service_name](https://docs.nginx.com/nginx/admin-guide/dynamic-modules/opentelemetry/#otel_service_name) or a custom trace attribute [otel_span_attr](https://docs.nginx.com/nginx/admin-guide/dynamic-modules/opentelemetry/#otel_span_attr) which can be used to set datasource name via `ibm-api-discovery-datasource.name`
+The datasource name of the APIs collected through this integration will be named after the attribute [otel_service_name](https://docs.nginx.com/nginx/admin-guide/dynamic-modules/opentelemetry/#otel_service_name) or alternatively a custom trace attribute [otel_span_attr](https://docs.nginx.com/nginx/admin-guide/dynamic-modules/opentelemetry/#otel_span_attr) which can be used to set datasource name via `ibm-api-discovery-datasource.name`
 
 Below is an example of nginx config when using this module
 
