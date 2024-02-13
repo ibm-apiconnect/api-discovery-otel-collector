@@ -1,9 +1,10 @@
 ---
+{{- if (eq .Values.discovery.datasource_type "istio") }}
 apiVersion: telemetry.istio.io/v1alpha1
 kind: Telemetry
 metadata:
   name: api-discovery-otel
-  namespace: {{ .Values.discovery.istio_namespace }}
+  namespace: {{ .Values.discovery.telemetry_namespace }}
 spec:
 #  accessLogging:
 #    - providers:
@@ -18,3 +19,4 @@ spec:
         literal:
           value: {{ .Values.discovery.datasource_name }}
     {{- end }}
+{{- end }}
