@@ -4,8 +4,8 @@ This document describes the set up details for the OpenTelemetry Collector For A
 ## Pre-req: Ensure one of the below datasource type is available on your system to collect traces through the opentelemetry collector
 
 Example configurations for both Istio and nginx are provided here
-1. Istio installation details - [Istio-Readme.md](https://github.com/Nirai2305/test-github-collector/blob/main/Istio.md)
-2. nginx Conguration details - [nginx-Readme.md](https://github.com/Nirai2305/test-github-collector/blob/main/nginx.md)
+1. Istio installation details - [Istio-Readme.md](https://github.com/ibm-apiconnect/api-discovery-otel-collector/blob/main/Istio-README.md)
+2. nginx Conguration details - [Nginx-Readme.md](https://github.com/ibm-apiconnect/api-discovery-otel-collector/blob/main/Nginx-README.md)
 
 ## Pre-req: Ensure helm is installed  
 
