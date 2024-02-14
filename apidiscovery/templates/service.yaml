@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/managed-by: ibm-apiconnect
     app.kubernetes.io/name: api-discovery-otel-collector
   name: management-api-discovery-otel-collector
-  namespace: {{ .Values.discovery.istio_namespace }}
+  namespace: {{ .Values.discovery.namespace }}
 spec:
   internalTrafficPolicy: Cluster
   ipFamilies:

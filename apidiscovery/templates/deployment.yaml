@@ -2,7 +2,7 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
   name: management-api-discovery-otel-collector
-  namespace: {{ .Values.discovery.istio_namespace }}
+  namespace: {{ .Values.discovery.namespace }}
   labels:
     app.kubernetes.io/instance: management
     app.kubernetes.io/managed-by: ibm-apiconnect
