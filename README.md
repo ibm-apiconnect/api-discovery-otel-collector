@@ -52,9 +52,13 @@ Once the collector has been deployed any istio or nginx instructmented pods whic
 
 ## Upgrading the collector
 
-The upgrade of the otel collector mainly refers to the changes in the [values.yaml](apidiscovery/values.yaml), especially with the `images.api_discovery_collector` parameter. The changes may include introducing new parameter, changing existing parameters, etc., It is recommended to upgrade the collector time to time.
+The upgrade of the otel collector mainly refers to the changes in the [values.yaml](apidiscovery/values.yaml), especially with the `images.api_discovery_collector` parameter.
 
-Make sure values.yaml file is based on your apiconnect provider org, authentication and datasource set up.
+The changes may include introducing a new parameter, changing existing parameters
+
+It is recommended to upgrade the collector from time to time.
+
+Make sure values.yaml file is based on your apiconnect provider org, authentication and datasource are set up.
 
 Run the following command to upgrade the collector with the new changes
 
