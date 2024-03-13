@@ -50,6 +50,22 @@ telemetry.telemetry.istio.io/api-discovery-otel created
 
 Once the collector has been deployed any istio or nginx instructmented pods which have traffic running through them will begin to be discovered and sent to the apiconnect discovery service.
 
+## Upgrading the collector
+
+The upgrade of the otel collector mainly refers to the changes in the [values.yaml](apidiscovery/values.yaml), especially with the `images.api_discovery_collector` parameter.
+
+The changes may include introducing a new parameter, changing existing parameters
+
+It is recommended to upgrade the collector from time to time.
+
+Make sure values.yaml file is based on your apiconnect provider org, authentication and datasource are set up.
+
+Run the following command to upgrade the collector with the new changes
+
+```
+helm template . | kubectl apply -f -
+```
+
 ## Uninstalling the collector
 
 The collector can be uninstalled using the following comman.  
