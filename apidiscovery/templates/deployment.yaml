@@ -62,6 +62,8 @@ spec:
               value: "{{ .Values.logging.log_level }}"
             - name: LOG_ENCODER
               value: "{{ .Values.logging.log_encoder }}"
+            - name: SOURCE_CUSTOM_DATA
+              value: "{{ .Values.discovery.datasource_type }}"
           volumeMounts:
             - mountPath: /etc/velox/credentials/org
               name: api-discovery-secret
