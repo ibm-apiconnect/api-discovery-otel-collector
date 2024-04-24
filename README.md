@@ -31,6 +31,7 @@ The apikey will be added to a kubernetes secret as part of the deployment and th
 
 - `discovery.datasource_name` - (Optional) field to set the datasource name for all APIs discovered by the collector through istio. If datasource name is empty, the namespace of the collected API will be used.
 - `telemetry_namespace`: (Optional) This is where the istio Telemetry CR will be deployed. By default the values file sets this to `istio-system` as the root configuration namespace to provide mesh level collection configuration. This can be customized as you wish based on your collection requirements regarding the deployed applications you want to be discovered. See here for further details https://istio.io/latest/docs/reference/config/telemetry/. Not needed for nginx configuration.
+    - For example: If there are more APIs discovered and you want to restrict some of the services, then the telemetry CR can be configured with matchLabels selector as mentioned in one of the [examples](https://istio.io/latest/docs/reference/config/telemetry/#examples)
 
 Once you have made the required updates to the values.yaml file you can deploy the collector.
 
