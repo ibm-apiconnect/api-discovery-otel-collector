@@ -10,6 +10,9 @@ discovery:
   api_key: xxxxxx
   namespace: istio-system
   telemetry_namespace: istio-system
+  # Enable the processor and edit the processor-configmap to choose values for batch and memory_limiter
+  # supported values are enabled and disabled
+  processor: disabled
 logging:
   log_level: info
   # supported values are json and console

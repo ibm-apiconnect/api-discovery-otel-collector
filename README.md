@@ -23,6 +23,8 @@ The following parameters require updates:
  - `discovery.apikey` - An API Key can be obtained from the api-manager for the user who has access to post the API.
 An API key can be created by logging into the APIC Manager UI and selecting the "My API Keys" option under the profile icon from the top navigation bar. 
 The apikey will be added to a kubernetes secret as part of the deployment and then mounted on the collector deployment pod.  
+ - `discovery.processor` - The flag to enable or disable the processors. The [configmap](apidiscovery/templates/processor-configmap.yaml) enables the existing batch and memory_limiter processor when `enabled` value is given and will not provide any processors in other cases. The available batch and memory limiter processors are configurable according to the requirements. <br /> &nbsp;
+Refer - [Batch processor](https://github.com/open-telemetry/opentelemetry-collector/blob/main/processor/batchprocessor/README.md#batch-processor) and [Memory Limiter processor](https://github.com/open-telemetry/opentelemetry-collector/tree/main/processor/memorylimiterprocessor#configuration)
 - `namespace`: The namespace where istio or nginx has been deployed on your cluster. As required by istio's telemetry integration the collector pod will be deployed here.
 - `images.api_discovery_collector`: As new versions of the collectors are released updating this property will enable the upgrade of the collector deployment. Note: collectors will require updates to ensure they remain compatible with the discovery service. Details of these updates will be available in this repository.
 - `logging.log_level`: Default log_level is `info`. For debug purposes the log level can be increased to debug if needed.  
