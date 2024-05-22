@@ -16,4 +16,4 @@ logging:
   log_encoder: json
 
 images:
-  api_discovery_collector: ghcr.io/ibm-apiconnect/api-discovery-otel-collector:20240312-143058
+  api_discovery_collector: ghcr.io/ibm-apiconnect/api-discovery-otel-collector:20240522-104525
