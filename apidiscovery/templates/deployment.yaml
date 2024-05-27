@@ -62,6 +62,8 @@ spec:
               value: "{{ .Values.logging.log_level }}"
             - name: LOG_ENCODER
               value: "{{ .Values.logging.log_encoder }}"
+            - name: DEBUG_VERBOSITY
+              value: "{{ .Values.logging.debugexporter_verbosity }}"
             - name: SOURCE_CUSTOM_DATA
               value: "{{ .Values.discovery.datasource_type }}"
           volumeMounts:
