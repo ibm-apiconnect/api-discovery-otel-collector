@@ -18,4 +18,4 @@ logging:
   debugexporter_verbosity: basic
 
 images:
-  api_discovery_collector: ghcr.io/ibm-apiconnect/api-discovery-otel-collector:20240527-105258
+  api_discovery_collector: ghcr.io/ibm-apiconnect/api-discovery-otel-collector:20240529-161035
