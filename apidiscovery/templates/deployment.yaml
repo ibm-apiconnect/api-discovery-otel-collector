@@ -70,6 +70,8 @@ spec:
             - mountPath: /etc/velox/credentials/org
               name: api-discovery-secret
               readOnly: true
+            - mountPath: /etc/otelcol/processor
+              name: processor-configmap
           securityContext:
             capabilities:
               drop:
@@ -86,6 +88,13 @@ spec:
         secret:
           defaultMode: 420
           secretName: api-discovery-secret
+      - name: processor-configmap
+        configMap:
+          defaultMode: 420
+          items:
+          - key: processor-cm.yaml
+            path: processor-configmap.yaml
+          name: processor-configmap
   strategy:
     type: Recreate
   revisionHistoryLimit: 10

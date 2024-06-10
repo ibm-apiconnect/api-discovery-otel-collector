@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: processor-configmap
+  namespace: {{ .Values.discovery.namespace }}
+data:
+  processor-cm.yaml: |
+{{- if (eq .Values.discovery.processor "enabled") }}
+    processors:
+      batch:
+        send_batch_size: 10000
+        send_batch_max_size: 11000
+        timeout: "30s"
+      memory_limiter:
+        check_interval: "1s"
+        limit_mib: 256
+        spike_limit_mib: 51
+    service:
+      pipelines:
+        traces:
+          processors: [filter,batch,memory_limiter]
+#{{- else if or (eq .Values.discovery.processor "disabled") (not (.Values.discovery.processor)) }}
+{{- else }}
+    processors: {}
+{{- end }}
