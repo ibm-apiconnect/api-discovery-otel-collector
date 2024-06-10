@@ -86,7 +86,7 @@ spec:
         secret:
           defaultMode: 420
           secretName: api-discovery-secret
-      - name: processor-configmap:
+      - name: processor-configmap
         configMap:
           defaultMode: 420
           items:

@@ -10,15 +10,15 @@ data:
       batch:
         send_batch_size: 10000
         send_batch_max_size: 11000
-        timeout: "10s"
+        timeout: "30s"
       memory_limiter:
         check_interval: "1s"
-        limit_mib: 1280
-        spike_limit_mib: 256
+        limit_mib: 256
+        spike_limit_mib: 51
     service:
       pipelines:
         traces:
-          processors: [batch,memory_limiter]
+          processors: [filter,batch,memory_limiter]
 #{{- else if or (eq .Values.discovery.processor "disabled") (not (.Values.discovery.processor)) }}
 {{- else }}
     processors: {}
