@@ -5,7 +5,7 @@ metadata:
   namespace: {{ .Values.discovery.namespace }}
 data:
   processor-cm.yaml: |
-{{- if (eq .Values.discovery.processor "enabled") }}
+{{- if (eq .Values.discovery.processors "enabled") }}
     processors:
       batch:
         send_batch_size: 10000
@@ -19,7 +19,7 @@ data:
       pipelines:
         traces:
           processors: [filter,batch,memory_limiter]
-#{{- else if or (eq .Values.discovery.processor "disabled") (not (.Values.discovery.processor)) }}
+#{{- else if or (eq .Values.discovery.processors "disabled") (not (.Values.discovery.processors)) }}
 {{- else }}
     processors: {}
 {{- end }}
