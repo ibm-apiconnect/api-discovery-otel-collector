@@ -29,7 +29,8 @@ Keeping the `filter` in the [`service.pipelines.traces.processors`](apidiscovery
 - `namespace`: The namespace where istio or nginx has been deployed on your cluster. As required by istio's telemetry integration the collector pod will be deployed here.
 - `images.api_discovery_collector`: As new versions of the collectors are released updating this property will enable the upgrade of the collector deployment. Note: collectors will require updates to ensure they remain compatible with the discovery service. Details of these updates will be available in this repository.
 - `logging.log_level`: Default log_level is `info`. For debug purposes the log level can be increased to debug if needed.  
-- `logging.debugexporter_verbosity`: The default value is `basic`. For detailed information about the exporter, the verbosity can be increased to `detailed` if needed
+- `logging.debugexporter_verbosity`: The default value is `basic`. For detailed information about the exporter, the verbosity can be increased to `detailed` if needed. <br />
+Note: It is recommended to keep the verbosity as `basic` for the collector with large-flowing traffic.
 
 **Istio specific parameters**
 
