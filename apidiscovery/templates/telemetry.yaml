@@ -13,10 +13,4 @@ spec:
   - providers:
     - name: discoveryOtelCollector
     randomSamplingPercentage: 100
-    {{- if .Values.discovery.datasource_name }}
-    customTags:
-      "ibm-api-discovery-datasource.name":
-        literal:
-          value: {{ .Values.discovery.datasource_name }}
-    {{- end }}
 {{- end }}

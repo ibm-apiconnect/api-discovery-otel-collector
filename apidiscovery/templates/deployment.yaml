@@ -66,6 +66,8 @@ spec:
               value: "{{ .Values.logging.debugexporter_verbosity }}"
             - name: SOURCE_CUSTOM_DATA
               value: "{{ .Values.discovery.datasource_type }}"
+            - name: DATASOURCE_NAME
+              value: "{{ .Values.discovery.datasource_name }}"
           volumeMounts:
             - mountPath: /etc/velox/credentials/org
               name: api-discovery-secret
