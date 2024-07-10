@@ -21,4 +21,4 @@ logging:
   debugexporter_verbosity: basic
 
 images:
-  api_discovery_collector: docker-na.artifactory.swg-devops.com/apic-dev-docker-local/velox/api-discovery-otel-collector:20240709-121013.amd64
+  api_discovery_collector: ghcr.io/ibm-apiconnect/api-discovery-otel-collector:20240709-121013
