@@ -1,8 +1,8 @@
 ---
 discovery:
   # platform_api_prefix is not required to change for ApiConnect on Cloud
-  datasource_type: nginx
   # supported values are istio, nginx
+  datasource_type: nginx
   datasource_name: myistio-data-source
   platform_api_prefix: platform-api
   apic_host_domain: us-east-a.apiconnect.automation.ibm.com
@@ -21,4 +21,4 @@ logging:
   debugexporter_verbosity: basic
 
 images:
-  api_discovery_collector: ghcr.io/ibm-apiconnect/api-discovery-otel-collector:20240624-132204
+  api_discovery_collector: ghcr.io/ibm-apiconnect/api-discovery-otel-collector:20240709-121013
