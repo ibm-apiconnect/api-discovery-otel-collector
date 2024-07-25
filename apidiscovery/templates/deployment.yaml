@@ -50,6 +50,12 @@ spec:
               memory: 128Mi
           name: api-discovery-otel-collector
           env:
+            - name: GOMEMLIMIT
+              valueFrom:
+                resourceFieldRef:
+                  containerName: api-discovery-otel-collector
+                  divisor: "0"
+                  resource: limits.memory
             - name: VELOX_ACCESS_SCOPE
               value: "org"
             - name: PROVIDER_ORG
