@@ -5,7 +5,8 @@ This document describes the set up details for the OpenTelemetry Collector For A
 
 Example configurations for both Istio and nginx are provided here
 1. Istio installation details - [Istio-Readme.md](https://github.com/ibm-apiconnect/api-discovery-otel-collector/blob/main/Istio-README.md)
-2. nginx Conguration details - [Nginx-Readme.md](https://github.com/ibm-apiconnect/api-discovery-otel-collector/blob/main/Nginx-README.md)
+2. Envoy Configuration details - [Envoy-Readme.md](https://github.com/ibm-apiconnect/api-discovery-otel-collector/blob/main/Envoy-README.md)
+3. nginx Configuration details - [Nginx-Readme.md](https://github.com/ibm-apiconnect/api-discovery-otel-collector/blob/main/Nginx-README.md)
 
 ## Pre-req: Ensure helm is installed  
 
