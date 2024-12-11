@@ -1,5 +1,5 @@
 ---
-{{- if (eq .Values.discovery.datasource_type "istio") | (eq .Values.discovery.datasource_type "envoy")}}
+{{- if or (eq .Values.discovery.datasource_type "istio" ) (eq .Values.discovery.datasource_type "envoy") }}
 apiVersion: telemetry.istio.io/v1alpha1
 kind: Telemetry
 metadata:
