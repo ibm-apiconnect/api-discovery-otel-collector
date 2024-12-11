@@ -17,7 +17,7 @@ https://helm.sh/docs/intro/install/
 In the helm directory, update the [values.yaml](apidiscovery/values.yaml) file based on your apiconnect provider org, authentication and istio set up  
 
 The following parameters require updates:  
- - `discovery.datasource_type` - (Optional) field to set the datasource type to decide if the specific telemetry configuration is needed. If the datasource type is istio, the required Istio Telemetry CR will be installed or helm will ignore the telemetry creation.
+ - `discovery.datasource_type` - (Optional) field to set the datasource type to decide if the specific telemetry and Envoy filter configurations are needed. If the datasource type is istio or envoy, the required Istio Telemetry CR will be installed or helm will ignore the telemetry creation. Similarly, if the datasource type is envoy, the required Envoy filter config will be installed. 
  - `discovery.datasource_name` - (Optional) field to set the datasource name for all APIs discovered by the collector. If datasource name is empty, the namespace of the collected API will be used.
  - `discovery.apic_host_domain` - Domain name of the ApiConnect instance where discovered APIs will be sent.<br /> &nbsp; Example : `us-east-a.apiconnect.automation.ibm.com`  
  - `discovery.provider_org` - The provider org name of the apiconnect manager  
