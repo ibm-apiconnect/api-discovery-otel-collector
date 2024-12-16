@@ -9,6 +9,8 @@ discovery:
   provider_org: myOrgName
   api_key: xxxxxx
   namespace: istio-system
+  # supported values are telemetry, envoyfilter
+  collector_mode: telemetry
   telemetry_namespace: istio-system
   # Enable the processor and edit the processor-configmap to choose values for batch and memory_limiter
   # supported values are enabled and disabled
