@@ -1,7 +1,7 @@
 ---
 discovery:
   # platform_api_prefix is not required to change for ApiConnect on Cloud
-  # supported values are istio, nginx
+  # supported values are istio, envoy, nginx
   datasource_type: nginx
   datasource_name: myistio-data-source
   platform_api_prefix: platform-api
