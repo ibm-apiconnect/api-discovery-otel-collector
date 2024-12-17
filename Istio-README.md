@@ -67,7 +67,7 @@ active loggers:
   credential_injector: debug
   ...
 ```
-4. Optionally, at this point any API calls runs through the rest api app will be collected by the envoy wasm filter to send to the Otel collector every 3 minutes and are discovered. <br /> &nbsp;
+4. Optionally, at this point any API calls which run through the rest api app will be collected by the envoy wasm filter to send to the Otel collector every 3 minutes and are discovered. <br /> &nbsp;
 5. The istio-proxy logs on the pod can be seen to check the wasm filter logs 
     ```
     kubectl logs <podname> -n <namespace> -c istio-proxy
