@@ -17,7 +17,7 @@ https://helm.sh/docs/intro/install/
 In the helm directory, update the [values.yaml](apidiscovery/values.yaml) file based on your apiconnect provider org, authentication and istio set up  
 
 The following parameters require updates:  
- - `discovery.datasource_type` - (Optional) field to set the datasource type to decide if the specific telemetry configuration is needed. If the datasource type is istio, the required Istio Telemetry CR will be installed or helm will ignore the telemetry creation.
+ - `discovery.datasource_type` - (Optional) field to set the datasource type to decide if the specific telemetry or envoyfilter configuration is needed. If the datasource type is istio, the required Istio Telemetry CR or Istio Envoy filter CR will be installed.
  - `discovery.datasource_name` - (Optional) field to set the datasource name for all APIs discovered by the collector. If datasource name is empty, the namespace of the collected API will be used.
  - `discovery.apic_host_domain` - Domain name of the ApiConnect instance where discovered APIs will be sent.<br /> &nbsp; Example : `us-east-a.apiconnect.automation.ibm.com`  
  - `discovery.provider_org` - The provider org name of the apiconnect manager  
@@ -38,6 +38,7 @@ Note: It is recommended to keep the verbosity as `basic` for the collector with 
 
 **Istio specific parameters**
 
+- `collector_mode`: (Optional) Istio can be installed either as Istio telemetry or Istio Envoyfilter. By default the values file sets this to `telemetry` and telemetry CR [telemtry.yaml](https://github.com/ibm-apiconnect/api-discovery-otel-collector/blob/main/apidiscovery/templates/telemetry.yaml) will be installed. The collector mode can be set to `envoyfilter` in values.yaml, then the Envoy filter [EnvoyFilter.yaml](https://github.com/ibm-apiconnect/api-discovery-otel-collector/blob/main/apidiscovery/templates/envoy-filter.yaml) will be installed in the `istio-system` namespace.
 - `telemetry_namespace`: (Optional) This is where the istio Telemetry CR will be deployed. By default the values file sets this to `istio-system` as the root configuration namespace to provide mesh level collection configuration. This can be customized as you wish based on your collection requirements regarding the deployed applications you want to be discovered. See here for further details https://istio.io/latest/docs/reference/config/telemetry/. Not needed for nginx configuration.
     - For example: If there are more APIs discovered and you want to restrict some of the services, then the telemetry CR can be configured with matchLabels selector as mentioned in one of the [examples](https://istio.io/latest/docs/reference/config/telemetry/#examples)
 
