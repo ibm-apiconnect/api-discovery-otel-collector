@@ -13,20 +13,11 @@ spec:
     patch:
       operation: MERGE
       value:
-        request_headers_to_add:
-        - append: false
-          header:
-            key: x-ibm-discovered-key
-            value: '%REQ(:path)%-%REQ(:method)%'
         response_headers_to_add:
         - append: false
           header:
             key: x-request-id
             value: '%REQ(x-request-id)%'
-        - append: false
-          header:
-            key: x-ibm-discovered-key
-            value: '%REQ(:path)%-%REQ(:method)%'
   # This patch defines a named Wasm extension and provides a URL to fetch Wasm binary from,
   # and the binary configuration. It should come before the next patch that applies it.
   - applyTo: EXTENSION_CONFIG
