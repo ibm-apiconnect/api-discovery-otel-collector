@@ -8,7 +8,7 @@ https://istio.io/latest/docs/setup/getting-started/
 
 The collector has been tested with `istioctl` version `1.19.x` & `1.20.x` 
 
-Istio can be deployed either as Istio telemetry or Istio Envoyfilter depending on the collector_mode in values.yaml. The Istio Envoyfilter can be configured when the request and response body need to be collected and API discovered from the installed application. Whereas it is not available in the Istio telemetry collects only other data like Method, Path, Host, status_code, content_type, and so on.
+The istio collector can be deployed either as Istio telemetry or Istio Envoyfilter depending on the collector_mode in values.yaml. The main difference between them is the istio Envoyfilter can be configured when the request and response body need to be collected and APIs discovered from the installed application. In contrast, it is not available in Istio telemetry which collects only other data like Method, Path, Host, status_code, content_type, and so on.
 
 ## Istio Telemetry
 ## Configuring Istio to support the collector  
