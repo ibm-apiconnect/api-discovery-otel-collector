@@ -40,7 +40,7 @@ spec:
               "@type": "type.googleapis.com/google.protobuf.StringValue"
               value: |
                 {
-                      "ds-hostname": "management-api-discovery-otel-collector",
+                      "header": "ds-hostname", "value": "management-api-discovery-otel-collector"
                 }
   # The last patch instructs to apply the above Wasm filter to the listener/http connection manager.
   - applyTo: HTTP_FILTER
