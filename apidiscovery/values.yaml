@@ -23,4 +23,4 @@ logging:
   debugexporter_verbosity: basic
 
 images:
-  api_discovery_collector: ghcr.io/ibm-apiconnect/api-discovery-otel-collector:20240801-123817
+  api_discovery_collector: ghcr.io/ibm-apiconnect/api-discovery-otel-collector:56-2025-01-15-07-30-30.amd64
