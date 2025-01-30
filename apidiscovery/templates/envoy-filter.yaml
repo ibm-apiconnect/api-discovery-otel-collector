@@ -1,5 +1,5 @@
 ---
-{{- if (eq .Values.discovery.collector_mode "envoyfilter") }}
+{{- if and (eq .Values.discovery.datasource_type "istio" ) (eq .Values.discovery.collector_mode "envoyfilter") }}
 apiVersion: networking.istio.io/v1alpha3
 kind: EnvoyFilter
 metadata:
