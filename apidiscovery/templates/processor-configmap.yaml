@@ -18,7 +18,7 @@ data:
     service:
       pipelines:
         traces:
-          processors: [filter/ibm-apiconnect,resource/ibm-apiconnect,attributes/ibm-apiconnect,batch,memory_limiter]
+          processors: [attributes/ibm-apiconnect,redaction/ibm-apiconnect,filter/ibm-apiconnect,transform/ibm-apiconnect,resource/ibm-apiconnect,batch,memory_limiter]
 #{{- else if or (eq .Values.discovery.processors "disabled") (not (.Values.discovery.processors)) }}
 {{- else }}
     processors: {}
