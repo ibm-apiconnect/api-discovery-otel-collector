@@ -1,0 +1,99 @@
+name: Update collector image tag
+
+on:
+  schedule:
+    - cron: '0 8 * * 1'  # Every Monday at 8am UTC
+  workflow_dispatch:       # Allow manual trigger
+
+jobs:
+  update-image:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      packages: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Get latest image tag from GHCR
+        id: latest
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Fetch all versions of the package from GHCR API
+          TAGS=$(gh api \
+            "/orgs/ibm-apiconnect/packages/container/api-discovery-otel-collector/versions" \
+            --paginate \
+            --jq '.[].metadata.container.tags[]')
+
+          # Tags are in format: {build_no}-{YYYY}-{MM}-{DD}-{HH}-{MM}-{SS}
+          # Sort by the datetime portion (fields 2-7) to find the newest
+          LATEST=$(echo "$TAGS" \
+            | grep -E '^[0-9]+-[0-9]{4}-[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{2}$' \
+            | sort -t'-' -k2,2n -k3,3n -k4,4n -k5,5n -k6,6n -k7,7n \
+            | tail -1)
+
+          if [ -z "$LATEST" ]; then
+            echo "ERROR: Could not determine latest tag" >&2
+            exit 1
+          fi
+
+          echo "latest=$LATEST" >> "$GITHUB_OUTPUT"
+          echo "Latest tag found: $LATEST"
+
+      - name: Get current image tag from values.yaml
+        id: current
+        run: |
+          CURRENT=$(grep 'api_discovery_collector:' apidiscovery/values.yaml \
+            | sed 's/.*://2' \
+            | tr -d ' ')
+          echo "current=$CURRENT" >> "$GITHUB_OUTPUT"
+          echo "Current tag in values.yaml: $CURRENT"
+
+      - name: Update values.yaml
+        if: steps.latest.outputs.latest != steps.current.outputs.current
+        run: |
+          NEW_TAG="${{ steps.latest.outputs.latest }}"
+          NEW_IMAGE="ghcr.io/ibm-apiconnect/api-discovery-otel-collector:${NEW_TAG}"
+          sed -i "s|api_discovery_collector:.*|api_discovery_collector: ${NEW_IMAGE}|" \
+            apidiscovery/values.yaml
+          echo "Updated values.yaml to: $NEW_IMAGE"
+
+      - name: Create Pull Request
+        if: steps.latest.outputs.latest != steps.current.outputs.current
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: update otel collector image to ${{ steps.latest.outputs.latest }}"
+          title: "chore: update otel collector image tag"
+          body: |
+            ## Automated image update
+
+            | | Tag |
+            |---|---|
+            | **From** | `${{ steps.current.outputs.current }}` |
+            | **To** | `${{ steps.latest.outputs.latest }}` |
+
+            This PR was created automatically by the update-image workflow.
+          branch: auto/update-otel-collector-image
+          delete-branch: true
+
+      - name: Delete old image versions from GHCR
+        if: steps.latest.outputs.latest != steps.current.outputs.current
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.DELETE_PACKAGES_TOKEN }}
+        run: |
+          # Fetch all version IDs sorted by date, keep newest 5, delete the rest
+          gh api \
+            "/orgs/ibm-apiconnect/packages/container/api-discovery-otel-collector/versions" \
+            --paginate \
+            --jq '[.[] | {id: .id, tag: (.metadata.container.tags[0] // "")}]' \
+            | jq -s 'add | map(select(.tag | test("^[0-9]+-[0-9]{4}-"))) | map(. + {ts: (.tag | ltrimstr(split("-")[0]+"-"))}) | sort_by(.ts) | reverse | .[1:] | .[].id' \
+            | while read -r version_id; do
+                echo "Deleting old version: $version_id"
+                gh api --method DELETE \
+                  "/orgs/ibm-apiconnect/packages/container/api-discovery-otel-collector/versions/$version_id"
+              done
