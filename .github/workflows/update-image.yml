@@ -79,3 +79,21 @@ jobs:
             This PR was created automatically by the update-image workflow.
           branch: auto/update-otel-collector-image
           delete-branch: true
+
+      - name: Delete old image versions from GHCR
+        if: steps.latest.outputs.latest != steps.current.outputs.current
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.DELETE_PACKAGES_TOKEN }}
+        run: |
+          # Fetch all version IDs sorted by date, keep newest 5, delete the rest
+          gh api \
+            "/orgs/ibm-apiconnect/packages/container/api-discovery-otel-collector/versions" \
+            --paginate \
+            --jq '[.[] | {id: .id, tag: (.metadata.container.tags[0] // "")}]' \
+            | jq -s 'add | map(select(.tag | test("^[0-9]+-[0-9]{4}-"))) | map(. + {ts: (.tag | ltrimstr(split("-")[0]+"-"))}) | sort_by(.ts) | reverse | .[1:] | .[].id' \
+            | while read -r version_id; do
+                echo "Deleting old version: $version_id"
+                gh api --method DELETE \
+                  "/orgs/ibm-apiconnect/packages/container/api-discovery-otel-collector/versions/$version_id"
+              done
